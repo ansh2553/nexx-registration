@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <title>NexX Esports Registration</title>
 
 <style>
@@ -9,67 +8,41 @@
 body{
 background:#0a0a0a;
 color:white;
-font-family:Arial, sans-serif;
+font-family:Arial;
 text-align:center;
-margin:0;
-padding:0;
 }
 
 .container{
 width:360px;
 margin:auto;
 margin-top:40px;
-padding:25px;
+padding:20px;
 background:#141414;
 border-radius:10px;
-box-shadow:0 0 15px rgba(0,229,255,0.3);
 }
 
-h1{
-color:#00e5ff;
-margin-bottom:10px;
-}
-
-.info{
-font-size:14px;
-color:#ccc;
-margin-bottom:15px;
-}
-
-button{
+input,button{
 width:100%;
 padding:12px;
 margin-top:10px;
 border:none;
 border-radius:6px;
+}
+
+input{
+background:#1f1f1f;
+color:white;
+}
+
+button{
+background:#00e5ff;
+color:black;
 font-weight:bold;
 cursor:pointer;
 }
 
 .paybtn{
 background:#00ff9d;
-color:black;
-}
-
-.submitbtn{
-background:#00e5ff;
-color:black;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:6px;
-background:#1f1f1f;
-color:white;
-}
-
-.note{
-font-size:13px;
-color:#aaa;
-margin-top:10px;
 }
 
 </style>
@@ -79,28 +52,17 @@ margin-top:10px;
 
 <div class="container">
 
-<h1>Free Fire Solo Tournament</h1>
+<h2>Free Fire Solo Tournament</h2>
+<p>MUIT • Room B305 • 28 March • 3:30 PM</p>
 
-<p class="info">
-Room B305 • 28 March • 3:30 PM
-</p>
-
-<p><b>Entry Fee: ₹20</b></p>
-
-<!-- Payment Button -->
+<p><b>Entry Fee ₹20</b></p>
 
 <button class="paybtn"
 onclick="window.open('https://pay.mypaylink.in/?q=n4pbIe','_blank')">
 Pay ₹20 Entry Fee
 </button>
 
-<p class="note">
-After payment, copy the Transaction ID and fill the form.
-</p>
-
-<!-- Registration Form -->
-
-<form id="regForm">
+<form action="https://script.google.com/macros/s/AKfycbwFmxUHnStzp9J98aCL3gNsdJ9PR2BOdxPNgpGIwNiqfWOMlxMiaivRe0co6Sas4yOUrw/exec" method="POST">
 
 <input type="text" name="name" placeholder="Full Name" required>
 
@@ -112,53 +74,11 @@ After payment, copy the Transaction ID and fill the form.
 
 <input type="text" name="transactionid" placeholder="Payment Transaction ID" required>
 
-<button type="submit" class="submitbtn">
-Submit Registration
-</button>
+<button type="submit">Submit Registration</button>
 
 </form>
 
-<p class="note">
-Only 50 players allowed.
-Invalid transaction IDs will be rejected.
-</p>
-
 </div>
-
-<script>
-
-const scriptURL = "https://script.google.com/macros/s/AKfycbxV6TYRHDs9fXnCRf_9P8lhMy2sN6oBW9yIXCy2XtjIqpoimnCyVcaetU2ZXilNPXPI-A/exec";
-
-const form = document.getElementById("regForm");
-
-form.addEventListener("submit", function(e){
-
-e.preventDefault();
-
-const formData = new FormData(form);
-
-fetch(scriptURL,{
-method:"POST",
-mode:"no-cors",
-body:formData
-})
-.then(res => res.text())
-.then(() => {
-
-alert("Registration Successful!");
-
-form.reset();
-
-})
-.catch(err => {
-
-alert("Error submitting form");
-
-});
-
-});
-
-</script>
 
 </body>
 </html>
