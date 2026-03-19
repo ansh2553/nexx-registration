@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>NexX Esports Registration</title>
+<meta charset="UTF-8">
+<title>NexX Esports Tournament Registration</title>
 
 <style>
 
@@ -12,24 +13,48 @@ font-family:Arial;
 text-align:center;
 }
 
-form{
-width:320px;
+.container{
+width:350px;
 margin:auto;
 margin-top:40px;
+padding:20px;
+background:#141414;
+border-radius:10px;
+}
+
+h1{
+color:#00e5ff;
 }
 
 input,button{
 width:100%;
 padding:12px;
-margin:8px 0;
+margin-top:10px;
 border:none;
 border-radius:6px;
+}
+
+input{
+background:#1f1f1f;
+color:white;
 }
 
 button{
 background:#00e5ff;
 color:black;
 font-weight:bold;
+cursor:pointer;
+}
+
+.paybtn{
+background:#00ff9d;
+margin-top:15px;
+}
+
+.note{
+font-size:13px;
+color:#bbb;
+margin-top:10px;
 }
 
 </style>
@@ -38,8 +63,21 @@ font-weight:bold;
 
 <body>
 
-<h2>Free Fire Solo Tournament</h2>
-<p>MUIT | Entry ₹20 | Only 50 Players</p>
+<div class="container">
+
+<h1>Free Fire Solo Tournament</h1>
+
+<p>MUIT | Room B305 | 28 March | 3:30 PM</p>
+
+<p><b>Entry Fee: ₹20</b></p>
+
+<a href="https://pay.mypaylink.in/?q=n4pbIe" target="_blank">
+<button class="paybtn">Pay ₹20 Entry Fee</button>
+</a>
+
+<p class="note">
+After payment, copy the Transaction ID and fill the form below.
+</p>
 
 <form id="regForm">
 
@@ -49,33 +87,44 @@ font-weight:bold;
 
 <input name="uid" placeholder="Free Fire UID" required>
 
-<input name="department" placeholder="Department" required>
+<input name="department" placeholder="Department / Course" required>
 
-<input name="payment" placeholder="Payment Transaction Id" required>
+<input name="payment" placeholder="Payment Transaction ID" required>
 
-<button type="submit">Register</button>
+<button type="submit">Submit Registration</button>
 
 </form>
+
+<p class="note">
+Only 50 players allowed. Invalid transaction IDs will be rejected.
+</p>
+
+</div>
 
 <script>
 
 const scriptURL = "https://script.google.com/macros/s/AKfycbw44YMAcIDDMHw5ES52eHvMCngBiqCUQIITsvBQr4HuLfvBMkx8sfXNjmMM5tjqoWno3w/exec";
 
-document.getElementById("regForm").addEventListener("submit", e =>{
+document.getElementById("regForm").addEventListener("submit", e => {
 
 e.preventDefault();
 
 const formData = new FormData(e.target);
-const data = Object.fromEntries(formData);
+const data = Object.fromEntries(formData.entries());
 
 fetch(scriptURL,{
 method:"POST",
 body:JSON.stringify(data)
 })
-.then(res=>res.json())
-.then(()=>{
-alert("Registration Successful");
-});
+.then(res => res.json())
+.then(response => {
+
+alert("Registration Successful!");
+
+document.getElementById("regForm").reset();
+
+})
+.catch(error => alert("Error submitting form"));
 
 });
 
