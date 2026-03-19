@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <title>NexX Esports Registration</title>
@@ -23,30 +22,38 @@ margin-top:40px;
 padding:25px;
 background:#141414;
 border-radius:10px;
-box-shadow:0 0 20px rgba(0,229,255,0.2);
+box-shadow:0 0 15px rgba(0,229,255,0.3);
 }
 
 h1{
 color:#00e5ff;
-margin-bottom:5px;
+margin-bottom:10px;
 }
 
-.subtitle{
+.info{
 font-size:14px;
-color:#bbb;
+color:#ccc;
 margin-bottom:15px;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:6px;
+font-weight:bold;
+cursor:pointer;
 }
 
 .paybtn{
 background:#00ff9d;
 color:black;
-font-weight:bold;
-cursor:pointer;
-padding:12px;
-border:none;
-border-radius:6px;
-width:100%;
-margin-top:10px;
+}
+
+.submitbtn{
+background:#00e5ff;
+color:black;
 }
 
 input{
@@ -57,18 +64,6 @@ border:none;
 border-radius:6px;
 background:#1f1f1f;
 color:white;
-}
-
-.submitbtn{
-background:#00e5ff;
-color:black;
-font-weight:bold;
-cursor:pointer;
-padding:12px;
-border:none;
-border-radius:6px;
-width:100%;
-margin-top:15px;
 }
 
 .note{
@@ -86,46 +81,46 @@ margin-top:10px;
 
 <h1>Free Fire Solo Tournament</h1>
 
-<p class="subtitle">
-MUIT | Room B305 | 28 March | 3:30 PM
+<p class="info">
+Room B305 • 28 March • 3:30 PM
 </p>
 
 <p><b>Entry Fee: ₹20</b></p>
 
-<!-- PAYMENT BUTTON -->
+<!-- Payment Button -->
 
-<a href="https://pay.mypaylink.in/?q=n4pbIe" target="_blank">
-<button class="paybtn">Pay ₹20 Entry Fee</button>
-</a>
+<button class="paybtn"
+onclick="window.open('https://pay.mypaylink.in/?q=n4pbIe','_blank')">
+Pay ₹20 Entry Fee
+</button>
 
 <p class="note">
-Step 1: Click the button and complete payment.<br>
-Step 2: Copy your payment Transaction ID.<br>
-Step 3: Fill the form below.
+After payment, copy the Transaction ID and fill the form.
 </p>
 
-<!-- REGISTRATION FORM -->
+<!-- Registration Form -->
 
 <form id="regForm">
 
-<input name="name" placeholder="Full Name" required>
+<input type="text" name="name" placeholder="Full Name" required>
 
-<input name="phone" placeholder="Phone Number" required>
+<input type="tel" name="phone" placeholder="Phone Number" required>
 
-<input name="uid" placeholder="Free Fire UID" required>
+<input type="text" name="uid" placeholder="Free Fire UID" required>
 
-<input name="department" placeholder="Department / Course" required>
+<input type="text" name="department" placeholder="Department / Course" required>
 
-<input name="transactionid" placeholder="Payment Transaction ID" required>
+<input type="text" name="payment" placeholder="Payment Transaction ID" required>
 
-<button class="submitbtn" type="submit">
+<button type="submit" class="submitbtn">
 Submit Registration
 </button>
 
 </form>
 
 <p class="note">
-Only 50 players allowed. Invalid transaction IDs will be rejected.
+Only 50 players allowed.
+Invalid transaction IDs will be rejected.
 </p>
 
 </div>
@@ -134,26 +129,31 @@ Only 50 players allowed. Invalid transaction IDs will be rejected.
 
 const scriptURL = "https://script.google.com/macros/s/AKfycbw44YMAcIDDMHw5ES52eHvMCngBiqCUQIITsvBQr4HuLfvBMkx8sfXNjmMM5tjqoWno3w/exec";
 
-document.getElementById("regForm").addEventListener("submit", function(e){
+const form = document.getElementById("regForm");
+
+form.addEventListener("submit", function(e){
 
 e.preventDefault();
 
-const formData = new FormData(this);
-const data = Object.fromEntries(formData.entries());
+const formData = new FormData(form);
 
 fetch(scriptURL,{
 method:"POST",
-body:JSON.stringify(data)
+body:formData
 })
-.then(res => res.json())
-.then(response => {
+.then(res => res.text())
+.then(() => {
 
 alert("Registration Successful!");
 
-document.getElementById("regForm").reset();
+form.reset();
 
 })
-.catch(error => alert("Error submitting form"));
+.catch(err => {
+
+alert("Error submitting form");
+
+});
 
 });
 
