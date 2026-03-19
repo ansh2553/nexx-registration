@@ -59,7 +59,7 @@ font-weight:bold;
 
 <script>
 
-const scriptURL = "PASTE_YOUR_SCRIPT_URL";
+const scriptURL = "https://script.google.com/macros/s/AKfycbw44YMAcIDDMHw5ES52eHvMCngBiqCUQIITsvBQr4HuLfvBMkx8sfXNjmMM5tjqoWno3w/exec";
 
 document.getElementById("regForm").addEventListener("submit", e =>{
 
