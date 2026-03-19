@@ -127,7 +127,7 @@ Invalid transaction IDs will be rejected.
 
 <script>
 
-const scriptURL = "https://script.google.com/macros/s/AKfycbw44YMAcIDDMHw5ES52eHvMCngBiqCUQIITsvBQr4HuLfvBMkx8sfXNjmMM5tjqoWno3w/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbxV6TYRHDs9fXnCRf_9P8lhMy2sN6oBW9yIXCy2XtjIqpoimnCyVcaetU2ZXilNPXPI-A/exec";
 
 const form = document.getElementById("regForm");
 
@@ -139,6 +139,7 @@ const formData = new FormData(form);
 
 fetch(scriptURL,{
 method:"POST",
+mode:"no-cors",
 body:formData
 })
 .then(res => res.text())
