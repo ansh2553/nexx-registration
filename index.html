@@ -1,64 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
-<title>NexX Esports Tournament Registration</title>
+<title>NexX Esports Registration</title>
 
 <style>
 
 body{
 background:#0a0a0a;
 color:white;
-font-family:Arial;
+font-family:Arial, sans-serif;
 text-align:center;
+margin:0;
+padding:0;
 }
 
 .container{
-width:350px;
+width:360px;
 margin:auto;
 margin-top:40px;
-padding:20px;
+padding:25px;
 background:#141414;
 border-radius:10px;
+box-shadow:0 0 20px rgba(0,229,255,0.2);
 }
 
 h1{
 color:#00e5ff;
+margin-bottom:5px;
 }
 
-input,button{
+.subtitle{
+font-size:14px;
+color:#bbb;
+margin-bottom:15px;
+}
+
+.paybtn{
+background:#00ff9d;
+color:black;
+font-weight:bold;
+cursor:pointer;
+padding:12px;
+border:none;
+border-radius:6px;
+width:100%;
+margin-top:10px;
+}
+
+input{
 width:100%;
 padding:12px;
 margin-top:10px;
 border:none;
 border-radius:6px;
-}
-
-input{
 background:#1f1f1f;
 color:white;
 }
 
-button{
+.submitbtn{
 background:#00e5ff;
 color:black;
 font-weight:bold;
 cursor:pointer;
-}
-
-.paybtn{
-background:#00ff9d;
+padding:12px;
+border:none;
+border-radius:6px;
+width:100%;
 margin-top:15px;
 }
 
 .note{
 font-size:13px;
-color:#bbb;
+color:#aaa;
 margin-top:10px;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -67,17 +86,25 @@ margin-top:10px;
 
 <h1>Free Fire Solo Tournament</h1>
 
-<p>MUIT | Room B305 | 28 March | 3:30 PM</p>
+<p class="subtitle">
+MUIT | Room B305 | 28 March | 3:30 PM
+</p>
 
 <p><b>Entry Fee: ₹20</b></p>
+
+<!-- PAYMENT BUTTON -->
 
 <a href="https://pay.mypaylink.in/?q=n4pbIe" target="_blank">
 <button class="paybtn">Pay ₹20 Entry Fee</button>
 </a>
 
 <p class="note">
-After payment, copy the Transaction ID and fill the form below.
+Step 1: Click the button and complete payment.<br>
+Step 2: Copy your payment Transaction ID.<br>
+Step 3: Fill the form below.
 </p>
+
+<!-- REGISTRATION FORM -->
 
 <form id="regForm">
 
@@ -89,11 +116,11 @@ After payment, copy the Transaction ID and fill the form below.
 
 <input name="department" placeholder="Department / Course" required>
 
-<input name="payment" placeholder="Payment Transaction ID" required>
-<a href="https://pay.mypaylink.in/?q=n4pbIe" target="_blank">
-<button type="button">Pay ₹20 Entry Fee</button>
-</a>
-<button type="submit">Submit Registration</button>
+<input name="transactionid" placeholder="Payment Transaction ID" required>
+
+<button class="submitbtn" type="submit">
+Submit Registration
+</button>
 
 </form>
 
@@ -107,11 +134,11 @@ Only 50 players allowed. Invalid transaction IDs will be rejected.
 
 const scriptURL = "https://script.google.com/macros/s/AKfycbw44YMAcIDDMHw5ES52eHvMCngBiqCUQIITsvBQr4HuLfvBMkx8sfXNjmMM5tjqoWno3w/exec";
 
-document.getElementById("regForm").addEventListener("submit", e => {
+document.getElementById("regForm").addEventListener("submit", function(e){
 
 e.preventDefault();
 
-const formData = new FormData(e.target);
+const formData = new FormData(this);
 const data = Object.fromEntries(formData.entries());
 
 fetch(scriptURL,{
